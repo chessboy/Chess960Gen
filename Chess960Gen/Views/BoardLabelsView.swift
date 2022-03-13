@@ -18,6 +18,14 @@ struct BoardLabelsView: View {
         self.width = width
     }
 
+	private func fileInReversedPosition(_ file: String) -> CGFloat {
+		return CGFloat(PiecePosition.files.reversed().firstIndex(of: file) ?? 0)
+	}
+	
+	private func rankInReversedPosition(_ rank: String) -> CGFloat {
+		return CGFloat(PiecePosition.ranks.reversed().firstIndex(of: rank) ?? 0)
+	}
+
     var body: some View {
 
 		ZStack {
@@ -26,14 +34,14 @@ struct BoardLabelsView: View {
 					Text(file)
 						.appFont(size: 12)
 						.foregroundColor(Colors.boardLabel)
-						.position(CGPoint(x: self.width/8 - 4 + CGFloat(PiecePosition.files.reversed().firstIndex(of: file) ?? 0) * self.width/8, y: self.width - 9))
+						.position(CGPoint(x: self.width/8 - 4 + fileInReversedPosition(file) * self.width/8, y: self.width - 9))
 				}
 				
 				ForEach(PiecePosition.ranks.reversed(), id: \.self) { rank in
 					Text(rank)
 						.appFont(size: 10)
 						.foregroundColor(Colors.boardLabel)
-						.position(CGPoint(x: 5, y: 9 + CGFloat(PiecePosition.ranks.reversed().firstIndex(of: rank) ?? 0) * self.width/8))
+						.position(CGPoint(x: 5, y: 9 + rankInReversedPosition(rank) * self.width/8))
 				}
 			} else {
 				ForEach(PiecePosition.files, id: \.self) { file in
