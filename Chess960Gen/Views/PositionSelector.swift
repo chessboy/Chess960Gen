@@ -21,7 +21,6 @@ struct PositionSelector: View {
 					}
 				}
 				.pickerStyle(WheelPickerStyle())
-				.labelsHidden()
 				Spacer()
 				Spacer()
 				Spacer()
