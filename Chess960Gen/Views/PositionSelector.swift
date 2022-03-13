@@ -20,6 +20,7 @@ struct PositionSelector: View {
 							.font(.custom("ChessAlpha2", size: 30))
 					}
 				}
+				.pickerStyle(WheelPickerStyle())
 				.labelsHidden()
 				Spacer()
 				Spacer()
