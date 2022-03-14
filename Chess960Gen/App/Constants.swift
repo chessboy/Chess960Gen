@@ -10,6 +10,11 @@ import Foundation
 
 struct Constants {
 		
+	enum SystemIcon: String {
+		case randomize = "shuffle"
+		case flip = "arrow.2.squarepath"
+	}
+
 	static let initialPositionIndex = 518
 	
 	static let allPositions = [

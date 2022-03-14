@@ -20,12 +20,12 @@ struct ContentView: View {
 		return "\(positionIndex)".padding(leftTo: 3, withPad: "0")
 	}
 		
-	func generateNewPosition(size: CGSize) {
+	func generateNewPosition() {
 		self.positionIndex = Int.random(in: 0..<960)
-		displayPosition(size: size)
+		animatePositionChange()
 	}
 	
-	func displayPosition(size: CGSize) {
+	func animatePositionChange() {
 		withAnimation(.easeInOut(duration: 0.75)) {
 			self.rowPosition = Constants.allPositions[self.positionIndex]
 		}
@@ -81,15 +81,16 @@ struct ContentView: View {
 					}
 					.buttonStyle(ScaleButtonStyle())
 					.sheet(isPresented: self.$showingSelector, onDismiss: {
-						self.displayPosition(size: geo.size)
+						self.animatePositionChange()
 					}) {
 						PositionSelector(showingSelector: self.$showingSelector, positionNumber: self.$positionIndex)
 					}
 					Spacer()
 					// buttons
-					ActionButton(systemIcon: "shuffle", action: { self.generateNewPosition(size: geo.size) })
+					ActionButton(systemIcon: Constants.SystemIcon.randomize.rawValue, action: { self.generateNewPosition()
+					})
 					Spacer()
-					ActionButton(systemIcon: "arrow.2.squarepath", action: { withAnimation(.easeInOut(duration: 0.5)) {
+					ActionButton(systemIcon: Constants.SystemIcon.flip.rawValue, action: { withAnimation(.easeInOut(duration: 0.5)) {
 						self.flipped.toggle()
 					}})
 					Spacer()
