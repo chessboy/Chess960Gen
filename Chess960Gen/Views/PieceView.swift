@@ -20,18 +20,18 @@ struct PieceView: View {
         self._rowPosition = rowPosition
 		self._flipped = flipped
         self.width = width
-		self.newPiecePositions = genPiecePositions
+		self.newPiecePositions = generatedPiecePositions
     }
 
-	var genPiecePositions: [PiecePosition] {
+	var generatedPiecePositions: [PiecePosition] {
 
 		var piecePositions: [PiecePosition] = []
 		let recoded = PiecePosition.recodedPosition(rowPosition)
 				
 		var newBlackRow = PiecePosition.blackRow
 		var newWhiteRow = PiecePosition.whiteRow
-		let one8th: CGFloat = width/8.0
-		let one16th: CGFloat = width/16.0
+		let one8th: CGFloat = width/8
+		let one16th: CGFloat = width/16
 		
 		for i in 0..<8 {
 			let piece = PiecePosition.pieceIds[i]
@@ -65,7 +65,7 @@ struct PieceView: View {
 			
 			BoardLabelsView(flipped: self.$flipped, width: self.width)
 			
-			ForEach(0..<self.newPiecePositions.count) { index in
+			ForEach(0..<self.newPiecePositions.count, id: \.self) { index in
 				Image(self.newPiecePositions[index].imageName)
 					.resizable()
 					.frame(width: self.width/8.0, height: self.width/8.0)
@@ -110,6 +110,8 @@ struct PieceView_Previews: PreviewProvider {
 						.overlay(Rectangle().stroke(Color.black.opacity(0.2), lineWidth: 1))
 						.scaleEffect(0.96)
 					}
+					
+					Text("Debugging Stuff:\n")
 					
 					Text("#\(self.positionNumber)")
 						.appFont(size: 30)

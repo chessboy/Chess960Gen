@@ -13,7 +13,7 @@ struct ActionButton: View {
 	var action: ()->()
 
     var body: some View {
-
+		
 	Button(action: {
 		withAnimation(.easeInOut(duration: 0.5)) {
 			self.action()

@@ -15,7 +15,7 @@ struct PositionSelector: View {
 			VStack {
 				Spacer()
 				Picker(selection: self.$positionNumber, label: Text("Position")) {
-					ForEach(0 ..< self.positions.count) {
+					ForEach(0 ..< self.positions.count, id: \.self) {
 						Text(self.positions[$0])
 							.font(.custom("ChessAlpha2", size: 30))
 					}
